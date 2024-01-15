@@ -1,5 +1,7 @@
 import webbrowser #SOGGYCAT BEST LANGUAGE!!
 import re
+import os
+import time
 class Vars:
     cmdop=True
     oson=True
@@ -12,7 +14,6 @@ class Vars:
     sogclpattern = r'<(.*?)>'
     sogclpattern2 = r'\.start(.*?)(?=\.end)'
     usrCreatedVars = {'placeholder': '0'}
-
 def sc():
     def sogcl(code):
         matches = re.findall(Vars.sogclpattern, code)
@@ -78,13 +79,29 @@ def sc():
             elif "-run" in object:
                 if "-sogcl" in object:
                     if "-file" in object:
-                        print("Sorry! directory file execution isnt available until v1.0.0 onwards!")
+                        directoryofsogcl=object.replace("soggycat", "")
+                        directoryofsogcl=directoryofsogcl.replace("-run", "")
+                        directoryofsogcl=directoryofsogcl.replace("-sogcl", "")
+                        directoryofsogcl=directoryofsogcl.replace("-dir", "")
+                        directoryofsogcl=directoryofsogcl.replace(" ", "")
+                        sogcl(open(directoryofsogcl, "r"))
                     elif "-body" in object:
                         sogcl(object)
+                    elif "-dir" in object:
+                        directoryofsogcl=object.replace("soggycat", "")
+                        directoryofsogcl=directoryofsogcl.replace("-run", "")
+                        directoryofsogcl=directoryofsogcl.replace("-sogcl", "")
+                        directoryofsogcl=directoryofsogcl.replace("-dir", "")
+                        directoryofsogcl=directoryofsogcl.replace(" ", "")
+                        sogcl(open(directoryofsogcl, "r"))  
             else:
-                print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the os!", Vars.RESET)
+                print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the OS! Happy Tinkering!", Vars.RESET)
         elif "help" in object:
             print("For Advanced Commands, do soggycat -help, for a regular help, do -help -regular")
+        elif "wait" in object:
+            wait=object.replace("wait", "")
+            wait=wait.replace(" ", "")
+            time.sleep(int(wait))    
         elif "echo" in object:
             print(object.replace("echo", "")) 
         else:
