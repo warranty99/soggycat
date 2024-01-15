@@ -64,14 +64,16 @@ def sc():
                         
                         else:
                             print("Successfully created empty .sogc file at current directory!")
-                        
                     elif "-sog" in object:
                         print("Sorry! .sog isnt supported until v1.0.0 onwards!")
             elif "-info" in object:
                 print("Running Soggycat >1.0.0")
             elif "-run" in object:
                 if "-sogcl" in object:
-                    
+                    if "-file" in object:
+                        
+                    elif "-body" in object:
+                        
             else:
                 print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the os!", Vars.RESET)
         elif "help" in object:
