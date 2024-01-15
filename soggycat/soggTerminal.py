@@ -14,6 +14,7 @@ class Vars:
     sogclpattern = r'<(.*?)>'
     sogclpattern2 = r'\.start(.*?)(?=\.end)'
     usrCreatedVars = {'placeholder': '0'}
+    sogclvariabledeclaratorpattern = re.compile(r'([^=]+)=(.+)')
 def sc():
     def sogcl(code):
         matches = re.findall(Vars.sogclpattern, code)
@@ -57,11 +58,7 @@ def sc():
                     systemnamedchanged=systemnamedchanged.replace(" ", "")
                     print("WARNING! Changing the name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
                     Vars.SystemSCName=str(systemnamedchanged)
-            elif "-var" in object:
-                dashvar=object.replace("soggycat", "")
-                dashvar=dashvar.replace("-var", "")
-                dashvar=dashvar.replace(" ", "")
-                print(getattr(Vars, dashvar))
+            
             elif "-create" in object:
                 if "-file" in object:
                     if "-sogcl" in object:
@@ -72,8 +69,19 @@ def sc():
                     elif "-sog" in object:
                         print("Sorry! .sog isnt made yet! try the .sogcl maybe!")
                 elif "-var" in object:
-                    dashvarvar = object.replace("-var", "")
-                    dashvarvar = object.replace("soggycat", "")
+                    dashvarvar=object.replace("-var", "")
+                    dashvarvar=dashvarvar.replace("soggycat", "")
+                    dashvarvar=dashvarvar.replace("-create", "")
+                    dashvarvar=dashvarvar.replace(" ", "") #what is left is the var next to its value, ex: l=2 or hi=8913 or hi=hi
+                    match=Vars.sogclvariabledeclaratorpattern.match(dashvarvar)
+                    if match:
+                        arg1 = match.group(1)
+                        arg2 = match.group(2)
+                        print(f"Var: {arg1}")
+                        print(f"Value: {arg2}")
+                        Vars.usrCreatedVars[str(arg1)] = arg2
+                    else:
+                        print("No match found.")        
             elif "-info" in object:
                 print("Running Soggycat >1.0.0")
             elif "-run" in object:
@@ -94,6 +102,14 @@ def sc():
                         directoryofsogcl=directoryofsogcl.replace("-dir", "")
                         directoryofsogcl=directoryofsogcl.replace(" ", "")
                         sogcl(open(directoryofsogcl, "r"))  
+            elif "-var" in object:
+                dashvar=object.replace("soggycat", "")
+                dashvar=dashvar.replace("-var", "")
+                dashvar=dashvar.replace(" ", "")
+                if (print(getattr(Vars, dashvar))) == AttributeError:
+                    pass
+                else:
+                    print(getattr(Vars, dashvar))
             else:
                 print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the OS! Happy Tinkering!", Vars.RESET)
         elif "help" in object:
