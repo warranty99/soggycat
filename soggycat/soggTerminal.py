@@ -1,4 +1,4 @@
-import webbrowser #SOGGY CAT BEST OS!! HUZZAHH
+import webbrowser #SOGGYCAT BEST LANGUAGE!!
 import re
 class Vars:
     cmdop=True
@@ -9,12 +9,12 @@ class Vars:
     BLUE="\033[94m"   
     RESET="\033[0m"
     SystemSCName="soggycat"
-    currentDirectory="soggycat/"
     sogclpattern = r'<(.*?)>'
-    sogclpattern2 = r'\.(.*?)(?=\.)'
+    sogclpattern2 = r'\.start(.*?)(?=\.end)'
+    usrCreatedVars = {'placeholder': '0'}
+
 def sc():
     def sogcl(code):
-        text = '<.echo hi!. .echo hello!. .echo oh, hey!.>'
         matches = re.findall(Vars.sogclpattern, code)
         statements = []
         for match in matches:
@@ -33,7 +33,7 @@ def sc():
                 webbrowser.open(repl1)
         elif "soggycat" in object:
             if "-off" in object:
-                print("Turning off OS..")
+                print("Turning off...")
                 Vars.oson=False
             elif "-change" in object:
                 if "-var" in object:
@@ -48,13 +48,13 @@ def sc():
                         systemnamedchanged=systemnamedchanged.replace("-change", "")
                         systemnamedchanged=systemnamedchanged.replace("-name", "")
                         systemnamedchanged=systemnamedchanged.replace(" ", "")
-                        print("WARNING! Changing the system name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
+                        print("WARNING! Changing the name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
                 elif "-name" in object:
                     systemnamedchanged=object.replace("soggycat", "")
                     systemnamedchanged=systemnamedchanged.replace("-change", "")
                     systemnamedchanged=systemnamedchanged.replace("-name", "")
                     systemnamedchanged=systemnamedchanged.replace(" ", "")
-                    print("WARNING! Changing the system name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
+                    print("WARNING! Changing the name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
                     Vars.SystemSCName=str(systemnamedchanged)
             elif "-var" in object:
                 dashvar=object.replace("soggycat", "")
@@ -69,7 +69,10 @@ def sc():
                         else:
                             print("Successfully created empty .sogcl file at current directory!")
                     elif "-sog" in object:
-                        print("Sorry! .sog isnt supported until v1.0.0 onwards!")
+                        print("Sorry! .sog isnt made yet! try the .sogcl maybe!")
+                elif "-var" in object:
+                    dashvarvar = object.replace("-var", "")
+                    dashvarvar = object.replace("soggycat", "")
             elif "-info" in object:
                 print("Running Soggycat >1.0.0")
             elif "-run" in object:
@@ -83,9 +86,9 @@ def sc():
         elif "help" in object:
             print("For Advanced Commands, do soggycat -help, for a regular help, do -help -regular")
         elif "echo" in object:
-            print(object.replace("echo", ""))    
+            print(object.replace("echo", "")) 
         else:
-            print("obj: '", str(object.replace(" ", "")), "' not recognized")
+            print("obj: ", object, " not recognized")
     while Vars.i=="f":
         if Vars.oson:
             if Vars.cmdop:
