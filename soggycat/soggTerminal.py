@@ -14,20 +14,17 @@ class Vars:
     sogclpattern2 = r'\.(.*?)(?=\.)'
 def sc():
     def sogcl(code):
-        text = '<.echo hi!. .echo hello!. .echo oh, hey!.>' #what sogcl code would look like 
-        matches = re.findall(sogclpattern, code)
+        text = '<.echo hi!. .echo hello!. .echo oh, hey!.>'
+        matches = re.findall(Vars.sogclpattern, code)
         statements = []
         for match in matches:
-            (match.strip())
-            statements.extend(dot_matches)
+            statements.extend(re.findall(Vars.sogclpattern2, match))
         for statement in statements:
             comd(statement)
     def comd(object):    
         if "-exit" in object:
             Vars.cmdop=False
             print("exiting cli..")
-        elif "echo" in object:
-            print(object.replace("echo", ""))
         elif "opn" in object:
             if "-w" in object:
                 repl1=object.replace("-w", "")
@@ -85,6 +82,8 @@ def sc():
                 print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the os!", Vars.RESET)
         elif "help" in object:
             print("For Advanced Commands, do soggycat -help, for a regular help, do -help -regular")
+        elif "echo" in object:
+            print(object.replace("echo", ""))    
         else:
             print("obj: '", str(object.replace(" ", "")), "' not recognized")
     while Vars.i=="f":
