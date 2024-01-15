@@ -51,16 +51,37 @@ def sc():
                 dashvar=dashvar.replace("-var", "")
                 dashvar=dashvar.replace(" ", "")
                 print(getattr(Vars, dashvar))
+            elif "-create" in object:
+                if "-file" in object:
+                    if "-sogcl" in object:
+                        if "-body" in object:
+                            sogclBody=object.replace("soggycat", "")
+                            sogclBody=sogclBody.replace("-create", "")
+                            sogclBody=sogclBody.replace("-file", "")
+                            sogclBody=sogclBody.replace("-sogcl", "")
+                            sogclBody=sogclBody.replace("-body", "")
+                            print("Succesfully created .sogc file at current directory with body!")
+                        
+                        else:
+                            print("Successfully created empty .sogc file at current directory!")
+                        
+                    elif "-sog" in object:
+                        print("Sorry! .sog isnt supported until v1.0.0 onwards!")
             elif "-info" in object:
                 print("Running Soggycat >1.0.0")
+            elif "-run" in object:
+                if "-sogcl" in object:
+                    
             else:
                 print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the os!", Vars.RESET)
+        elif "help" in object:
+            print("For Advanced Commands, do soggycat -help, for a regular help, do -help -regular")
         else:
-            print("obj:", object, "not recognized")
+            print("obj: '", str(object.replace(" ", "")), "' not recognized")
     while Vars.i=="f":
         if Vars.oson:
             if Vars.cmdop:
-                cmd = input(Vars.SystemSCName+" >")
+                cmd = input(Vars.SystemSCName+" > ")
                 comd(cmd)
             else:
                 Vars.cmdop=False
