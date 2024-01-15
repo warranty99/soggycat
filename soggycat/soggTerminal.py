@@ -1,14 +1,27 @@
 import webbrowser #SOGGY CAT BEST OS!! HUZZAHH
+import re
 class Vars:
     cmdop=True
     oson=True
     i="f"
     RED="\033[91m"
     GREEN="\033[92m"
-    BLUE="\033[94m"
+    BLUE="\033[94m"   
     RESET="\033[0m"
     SystemSCName="soggycat"
+    currentDirectory="soggycat/"
+    sogclpattern = r'<(.*?)>'
+    sogclpattern2 = r'\.(.*?)(?=\.)'
 def sc():
+    def sogcl(code):
+        text = '<.echo hi!. .echo hello!. .echo oh, hey!.>' #what sogcl code would look like 
+        matches = re.findall(sogclpattern, code)
+        statements = []
+        for match in matches:
+            (match.strip())
+            statements.extend(dot_matches)
+        for statement in statements:
+            comd(statement)
     def comd(object):    
         if "-exit" in object:
             Vars.cmdop=False
@@ -55,15 +68,9 @@ def sc():
                 if "-file" in object:
                     if "-sogcl" in object:
                         if "-body" in object:
-                            sogclBody=object.replace("soggycat", "")
-                            sogclBody=sogclBody.replace("-create", "")
-                            sogclBody=sogclBody.replace("-file", "")
-                            sogclBody=sogclBody.replace("-sogcl", "")
-                            sogclBody=sogclBody.replace("-body", "")
-                            print("Succesfully created .sogc file at current directory with body!")
-                        
+                            print("Created .sogcl file at current directory!")
                         else:
-                            print("Successfully created empty .sogc file at current directory!")
+                            print("Successfully created empty .sogcl file at current directory!")
                     elif "-sog" in object:
                         print("Sorry! .sog isnt supported until v1.0.0 onwards!")
             elif "-info" in object:
@@ -71,9 +78,9 @@ def sc():
             elif "-run" in object:
                 if "-sogcl" in object:
                     if "-file" in object:
-                        
+                        print("Sorry! directory file execution isnt available until v1.0.0 onwards!")
                     elif "-body" in object:
-                        
+                        sogcl(object)
             else:
                 print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the os!", Vars.RESET)
         elif "help" in object:
