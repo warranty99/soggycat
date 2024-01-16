@@ -23,18 +23,8 @@ def sc():
             statements.extend(re.findall(Vars.sogclpattern2, match))
         for statement in statements:
             comd(statement)
-    def comd(object):    
-        if "-exit" in object:
-            Vars.cmdop=False
-            print("exiting cli..")
-        elif "opn" in object:
-            if "-w" in object:
-                repl1=object.replace("-w", "")
-                repl1=repl1.replace("opn", "")
-                repl1=repl1.replace(" ", "")
-                print(repl1)
-                webbrowser.open(repl1)
-        elif "soggycat" in object:
+    def comd(object):
+        if "soggycat" in object:
             if "-off" in object:
                 print("Turning off...")
                 Vars.oson=False
@@ -113,7 +103,18 @@ def sc():
                 dashvarr=dashvarr.replace(" ", "")     
                 print(Vars.usrCreatedVars.get(dashvarr))
             else:
-                print(Vars.BLUE, "Be careful when dealing with soggycat commands! you can literally change the code! Happy Tinkering!", Vars.RESET)
+                print(Vars.BLUE, "Be careful when dealing with soggycat commands! you can literally change the code! Happy Tinkering!", Vars.RESET)    
+        elif "-exit" in object:
+            Vars.cmdop=False
+            print("exiting cli..")
+        elif "opn" in object:
+            if "-w" in object:
+                repl1=object.replace("-w", "")
+                repl1=repl1.replace("opn", "")
+                repl1=repl1.replace(" ", "")
+                print(repl1)
+                webbrowser.open(repl1)
+        
         elif "help" in object:
             print("For Advanced Commands, do soggycat -help, for a regular help, do help -regular")
         elif "wait" in object:
