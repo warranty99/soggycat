@@ -17,7 +17,6 @@ Spaces dont matter in .sogcl, in fact, they are discouraged as they can add unne
 If you wanna wait, you can do ```wait``` followed by your number: ```wait5```
 Wanna rickroll someone? heres that:
 ```
-
 <.startopn-whttps://www.youtube.com/watch?v=dQw4w9WgXcQ.end>
 ```
 you can use -opn -w then your website to open something in your browser
