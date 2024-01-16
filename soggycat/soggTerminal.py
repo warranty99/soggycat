@@ -1,28 +1,36 @@
-import webbrowser #SOGGYCAT BEST LANGUAGE!!
+import webbrowser
 import re
 import os
 import time
 class Vars:
-    cmdop=True
-    oson=True
-    i="f"
-    RED="\033[91m"
-    GREEN="\033[92m"
-    BLUE="\033[94m"   
-    RESET="\033[0m"
-    SystemSCName="soggycat"
+    cmdop = True
+    oson = True
+    i = "f"
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    BLUE = "\033[94m"
+    RESET = "\033[0m"
+    SystemSCName = "soggycat"
     sogclpattern = r'<(.*?)>'
     sogclpattern2 = r'\.start(.*?)(?=\.end)'
     usrCreatedVars = {'placeholder': '0'}
     sogclvariabledeclaratorpattern = re.compile(r'([^=]+)=(.+)')
 def sc():
-    def sogcl(code):
-        matches = re.findall(Vars.sogclpattern, code)
-        statements = []
-        for match in matches:
-            statements.extend(re.findall(Vars.sogclpattern2, match))
-        for statement in statements:
-            comd(statement)
+    def sogcl(code, file=None):
+        if file is None:
+            matches = re.findall(Vars.sogclpattern, code)
+            statements = []
+            for match in matches:
+                statements.extend(re.findall(Vars.sogclpattern2, match))
+            for statement in statements:
+                comd(statement)
+        else:
+            matches = re.findall(Vars.sogclpattern, str(open(file, 'r')))
+            statements = []
+            for match in matches:
+                statements.extend(re.findall(Vars.sogclpattern2, match))
+            for statement in statements:
+                comd(statement)       
     def comd(object):
         if "soggycat" in object:
             if "-off" in object:
@@ -55,7 +63,7 @@ def sc():
                         directoryofsogcl=object.replace("soggycat", "")
                         directoryofsogcl=directoryofsogcl.replace("-run", "")
                         directoryofsogcl=directoryofsogcl.replace("-sogcl", "")
-                        directoryofsogcl=directoryofsogcl.replace("-dir", "")
+                        directoryofsogcl=directoryofsogcl.replace("-file", "")
                         directoryofsogcl=directoryofsogcl.replace(" ", "")
                         sogcl(open(directoryofsogcl, "r"))
                     elif "-body" in object:
@@ -75,7 +83,7 @@ def sc():
                         else:
                             print("Successfully created empty .sogcl file at current directory!")
                     elif "-sog" in object:
-                        print("Sorry! .sog isnt made yet! try the .sogcl maybe!")
+                        print("WIP")
                 elif "-usrvar" in object:
                     dashvarvar=object.replace("-usrvar", "")
                     dashvarvar=dashvarvar.replace("soggycat", "")
@@ -113,8 +121,7 @@ def sc():
                 repl1=repl1.replace("opn", "")
                 repl1=repl1.replace(" ", "")
                 print(repl1)
-                webbrowser.open(repl1)
-        
+                webbrowser.open(repl1)    
         elif "help" in object:
             print("For Advanced Commands, do soggycat -help, for a regular help, do help -regular")
         elif "wait" in object:
@@ -125,13 +132,15 @@ def sc():
             print(object.replace("echo", "")) 
         else:
             print("obj: ", object, " not recognized")
-    while Vars.i=="f":
+    def sogclp_interpret(code):
+        comd(code)
+    while Vars.i == "f":
         if Vars.oson:
             if Vars.cmdop:
-                cmd = input(Vars.SystemSCName+" > ")
+                cmd = input(Vars.SystemSCName + " > ")
                 comd(cmd)
             else:
-                Vars.cmdop=False
+                Vars.cmdop = False
         else:
-            Vars.i="s"
+            Vars.i = "s"
 sc()
