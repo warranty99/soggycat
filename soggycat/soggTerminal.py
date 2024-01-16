@@ -31,6 +31,7 @@ def sc():
             if "-w" in object:
                 repl1=object.replace("-w", "")
                 repl1=repl1.replace("opn", "")
+                repl1=repl1.replace(" ", "")
                 print(repl1)
                 webbrowser.open(repl1)
         elif "soggycat" in object:
@@ -58,32 +59,6 @@ def sc():
                     systemnamedchanged=systemnamedchanged.replace(" ", "")
                     print("WARNING! Changing the name can have weird, and i mean WEIRD side effects on the terminal, YOU WANTED THIS!")
                     Vars.SystemSCName=str(systemnamedchanged)
-            
-            elif "-create" in object:
-                if "-file" in object:
-                    if "-sogcl" in object:
-                        if "-body" in object:
-                            print("Created .sogcl file at current directory!")
-                        else:
-                            print("Successfully created empty .sogcl file at current directory!")
-                    elif "-sog" in object:
-                        print("Sorry! .sog isnt made yet! try the .sogcl maybe!")
-                elif "-var" in object:
-                    dashvarvar=object.replace("-var", "")
-                    dashvarvar=dashvarvar.replace("soggycat", "")
-                    dashvarvar=dashvarvar.replace("-create", "")
-                    dashvarvar=dashvarvar.replace(" ", "") #what is left is the var next to its value, ex: l=2 or hi=8913 or hi=hi
-                    match=Vars.sogclvariabledeclaratorpattern.match(dashvarvar)
-                    if match:
-                        arg1 = match.group(1)
-                        arg2 = match.group(2)
-                        print(f"Var: {arg1}")
-                        print(f"Value: {arg2}")
-                        Vars.usrCreatedVars[str(arg1)] = arg2
-                    else:
-                        print("No match found.")        
-            elif "-info" in object:
-                print("Running Soggycat >1.0.0")
             elif "-run" in object:
                 if "-sogcl" in object:
                     if "-file" in object:
@@ -102,6 +77,28 @@ def sc():
                         directoryofsogcl=directoryofsogcl.replace("-dir", "")
                         directoryofsogcl=directoryofsogcl.replace(" ", "")
                         sogcl(open(directoryofsogcl, "r"))  
+            elif "-create" in object:
+                if "-file" in object:
+                    if "-sogcl" in object:
+                        if "-body" in object:
+                            print("Created .sogcl file at current directory!")
+                        else:
+                            print("Successfully created empty .sogcl file at current directory!")
+                    elif "-sog" in object:
+                        print("Sorry! .sog isnt made yet! try the .sogcl maybe!")
+                elif "-usrvar" in object:
+                    dashvarvar=object.replace("-usrvar", "")
+                    dashvarvar=dashvarvar.replace("soggycat", "")
+                    dashvarvar=dashvarvar.replace("-create", "") #what is left is the var next to its value, ex: l=2 or hi=8913 or hi=hi
+                    match=Vars.sogclvariabledeclaratorpattern.match(dashvarvar)
+                    if match:
+                        arg1 = match.group(1)
+                        arg2 = match.group(2)
+                        Vars.usrCreatedVars[str(arg1)] = arg2
+                    else:
+                        print("No match found.")        
+            elif "-info" in object:
+                print("Running Soggycat >1.0.0")
             elif "-var" in object:
                 dashvar=object.replace("soggycat", "")
                 dashvar=dashvar.replace("-var", "")
@@ -110,10 +107,15 @@ def sc():
                     pass
                 else:
                     print(getattr(Vars, dashvar))
+            elif "-usrvar" in object:
+                dashvarr=object.replace("soggycat", "")   
+                dashvarr=dashvarr.replace("-usrvar", "")
+                dashvarr=dashvarr.replace(" ", "")     
+                print(Vars.usrCreatedVars.get(dashvarr))
             else:
-                print(Vars.BLUE, "Be carefull when dealing with soggycat commands! you can literally change the code in the OS! Happy Tinkering!", Vars.RESET)
+                print(Vars.BLUE, "Be careful when dealing with soggycat commands! you can literally change the code! Happy Tinkering!", Vars.RESET)
         elif "help" in object:
-            print("For Advanced Commands, do soggycat -help, for a regular help, do -help -regular")
+            print("For Advanced Commands, do soggycat -help, for a regular help, do help -regular")
         elif "wait" in object:
             wait=object.replace("wait", "")
             wait=wait.replace(" ", "")
