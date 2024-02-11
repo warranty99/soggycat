@@ -1,5 +1,7 @@
 # .SOGCL
 If you want a better version of this, use [SOG+](https://github.com/warranty99/SOG-PLUS), thanks.
+
+
 My first programming language, just a learning opportunity for more languages in the future, made in python.
 ## Syntax
 Please note this language is NOT turing complete, thanks :)
